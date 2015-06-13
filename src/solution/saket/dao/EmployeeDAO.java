@@ -21,6 +21,7 @@ public class EmployeeDAO {
 		
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		ResultSet ns = null;
 		
 		ps = (PreparedStatement) con.prepareStatement("SELECT * FROM employee");
 		
