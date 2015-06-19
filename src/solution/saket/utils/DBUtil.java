@@ -1,9 +1,11 @@
 package solution.saket.utils;
 
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.PreparedStatement;
 
 public class DBUtil {
 	
@@ -33,6 +35,24 @@ public class DBUtil {
 	 }
 		
 		return con;
+	}
+	
+	public static void closeResources(PreparedStatement ps, ResultSet rs, Connection con) {
+		try {
+			if(ps!=null)
+			{
+			ps.close();
+			}
+			if(rs!=null){
+				rs.close();
+			}
+			if(con!=null) {
+				con.close();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public static void main(String[] args) {

@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html data-ng-app="restApp">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>RestApp | Home</title>
 </head>
-<body>
-Hey Saket!! How are you.
+<body data-ng-controller="MainCtrl as mctrl">
+
+<button data-ng-click="mctrl.getAll()">Get all Employees</button>
+
+
+<script src="scripts/angular.js"></script>
+<script src="scripts/app.js"></script>
+<script src="scripts/controllers/main-ctrl.js"></script>
 </body>
 </html>

@@ -8,12 +8,13 @@ import java.util.List;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
+import solution.saket.exceptions.AppException;
 import solution.saket.model.Employee;
 import solution.saket.utils.DBUtil;
 
 public class EmployeeDAO {
 	
-	public List<Employee> getAll() throws SQLException {
+	public List<Employee> getAll() throws AppException {
 		
 		List<Employee> empList = new ArrayList<Employee>();
 		
@@ -22,6 +23,8 @@ public class EmployeeDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		ResultSet ns = null;
+		
+		try {
 		
 		ps = (PreparedStatement) con.prepareStatement("SELECT * FROM employee");
 		
@@ -38,6 +41,14 @@ public class EmployeeDAO {
 			
 			empList.add(emp);
 				
+		}
+	} catch(SQLException e) {
+			e.printStackTrace();
+			throw new AppException("Error in fetching records from database.",e.getCause());
+	}
+		finally {
+			DBUtil.closeResources(ps, rs, con);
+			
 		}
 		
 		return empList;

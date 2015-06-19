@@ -11,6 +11,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import solution.saket.dao.EmployeeDAO;
+import solution.saket.exceptions.AppException;
 import solution.saket.model.Employee;
 
 
@@ -21,12 +22,22 @@ public class EmployeeController {
 	@Path("/all")
 	@Produces(MediaType.APPLICATION_JSON)
 	
-	public List<Employee> getAll() throws SQLException {
+	public AppResponse getAll() throws SQLException {
 		
-		EmployeeDAO dao = new EmployeeDAO();
-		List<Employee> empList = dao.getAll();
+		AppResponse resp = new AppResponse();
 		
-		return empList;
+		try {
+			EmployeeDAO dao = new EmployeeDAO();
+			List<Employee> empList = dao.getAll();
+			resp.setPayload(empList);
+		} catch (AppException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			resp.setStatus(AppResponse.ERROR);
+			resp.setMessage(e.getMessage());
+		}
+		
+		return resp;
 	}
 	@GET
 	@Path("/add")
