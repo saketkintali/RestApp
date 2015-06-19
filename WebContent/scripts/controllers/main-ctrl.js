@@ -14,7 +14,7 @@
 			 method:'GET',
 			 url: 'api/employee/all'
 			}).success(function(data){
-				console.log(data);
+				mctrl.name = data;
 			}).error(function(data) {
 				console.log(error);
 				
